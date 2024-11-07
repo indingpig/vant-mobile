@@ -22,6 +22,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.17.6
     version: 20.17.6
+  '@types/postcss-pxtorem':
+    specifier: ^6.1.0
+    version: 6.1.0
   '@vitejs/plugin-vue':
     specifier: ^5.1.4
     version: 5.1.4(vite@5.4.10)(vue@3.5.12)
@@ -43,6 +46,9 @@ devDependencies:
   npm-run-all2:
     specifier: ^7.0.1
     version: 7.0.1
+  postcss-pxtorem:
+    specifier: ^6.1.0
+    version: 6.1.0(postcss@8.4.47)
   prettier:
     specifier: ^3.3.3
     version: 3.3.3
@@ -730,6 +736,12 @@ packages:
     resolution: {integrity: sha512-VEI7OdvK2wP7XHnsuXbAJnEpEkF6NjSN45QJlL4VGqZSXsnicpesdTWsg9RISeSdYd3yeRj/y3k5KGjUXYnFwQ==}
     dependencies:
       undici-types: 6.19.8
+    dev: true
+
+  /@types/postcss-pxtorem@6.1.0:
+    resolution: {integrity: sha512-kHsYTjQgllOfhi3J+xunjMKUZ3APARV/JYeOOcIVLhvPVS162S8Ir8LsZwioFFyYCSnQp+aisupiSaRWVwKyDA==}
+    dependencies:
+      postcss: 8.4.47
     dev: true
 
   /@typescript-eslint/eslint-plugin@8.13.0(@typescript-eslint/parser@8.13.0)(eslint@9.14.0)(typescript@5.6.3):
@@ -1756,6 +1768,14 @@ packages:
     resolution: {integrity: sha512-eG2dWTVw5bzqGRztnHExczNxt5VGsE6OwTeCG3fdUf9KBsZzO3R5OIIIzWR+iZA0NtZ+RDVdaoE2dK1cn6jH4g==}
     engines: {node: '>=0.10'}
     hasBin: true
+    dev: true
+
+  /postcss-pxtorem@6.1.0(postcss@8.4.47):
+    resolution: {integrity: sha512-ROODSNci9ADal3zUcPHOF/K83TiCgNSPXQFSbwyPHNV8ioHIE4SaC+FPOufd8jsr5jV2uIz29v1Uqy1c4ov42g==}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.47
     dev: true
 
   /postcss-selector-parser@6.1.2:
