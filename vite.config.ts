@@ -3,6 +3,8 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import postCssPxtorem from 'postcss-pxtorem';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -17,6 +19,8 @@ export default defineConfig({
 	css: {
 		postcss: {
 			plugins: [
+				tailwindcss(),
+				autoprefixer(),
 				postCssPxtorem({
 					rootValue: 16,
 					propList: ['*'],
