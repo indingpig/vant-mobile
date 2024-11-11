@@ -50,6 +50,12 @@
   }
 }
 
+@layer base {
+  :root {
+    --tw-bg-opacity: 1
+  }
+}
+
 *,
 *::before,
 *::after {

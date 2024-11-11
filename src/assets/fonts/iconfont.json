@@ -1,0 +1,44 @@
+{
+  "id": "4741949",
+  "name": "移动端通用",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "移动端通用项目",
+  "glyphs": [
+    {
+      "icon_id": "33987013",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "34631579",
+      "name": "向右",
+      "font_class": "xiangyou",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "2742671",
+      "name": "添加",
+      "font_class": "tianjia",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "7457560",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "34631589",
+      "name": "向左",
+      "font_class": "xiangzuo",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    }
+  ]
+}
