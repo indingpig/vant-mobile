@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Flashcard from '@/views/FlashCard/Flashcard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +9,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-    }
+    },
+		{
+			path: '/flashcard',
+			name: 'flashcard',
+			component: Flashcard,
+		}
   ],
 })
 
