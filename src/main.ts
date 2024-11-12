@@ -1,5 +1,5 @@
-import './assets/scss/main.scss';
 import '@/assets/scss/iconfont.css';
+import './assets/scss/main.scss';
 
 import { createApp } from 'vue';
 import App from './App.vue';
