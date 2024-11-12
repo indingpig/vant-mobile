@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Flashcard from '@/views/FlashCard/Flashcard.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import Flashcard from '@/views/FlashCard/FlashCard.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +16,6 @@ const router = createRouter({
 			component: Flashcard,
 		}
   ],
-})
+});
 
-export default router
+export default router;
