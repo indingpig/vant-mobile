@@ -1,0 +1,65 @@
+{
+	"aList": [
+		{
+			"context": "Flash Card Activities",
+			"url": "https://www.datocms-assets.com/106329/1694886590-language-together-spanish-flash-cards-for-kids-set-1-activities-sampler.pdf"
+		},
+		{
+			"context": "Contact Us",
+			"url": "https://languagetogether.com/contact"
+		},
+		{
+			"context": "Shop Online",
+			"url": "https://languagetogether.com"
+		},
+		{
+			"context": "Technical Support",
+			"url": "https://languagetogether.com/pages/flashcards-support"
+		},
+		{
+			"context": "Terms & Conditions",
+			"url": "https://languagetogether.com/pages/legal"
+		}
+	],
+	"mediaList": [
+		{
+			"context": "Facebook",
+			"url": "https://www.facebook.com/languagetogether.net",
+			"imageUrl": "https://app.languagetogether.com/flashcard/_next/image?url=%2Fflashcard%2F_next%2Fstatic%2Fmedia%2Ffacebook-square-brands.48ef9a9d.svg&w=1080&q=75"
+		},
+		{
+			"context": "Instagram",
+			"url": "https://twitter.com/LanguageTogethr",
+			"imageUrl": "https://app.languagetogether.com/flashcard/_next/image?url=%2Fflashcard%2F_next%2Fstatic%2Fmedia%2Ftwitter-square-brands.08b43fc3.svg&w=1080&q=75"
+		},
+		{
+			"context": "Instagram",
+			"url": "https://www.instagram.com/languagetogether",
+			"imageUrl": "https://app.languagetogether.com/flashcard/_next/image?url=%2Fflashcard%2F_next%2Fstatic%2Fmedia%2Finstagram-square-brands.44723478.svg&w=1080&q=75"
+		}
+	],
+	"subject": {
+		"imgSub" : {
+			"context": "Spanish for Kids Set 1 Product Cover",
+			"url": "https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1694885418-product-box-updated-5160a8b15cf6f02ac0a8.png&w=640&q=75"
+		},
+		"h1": "Flash Card Audio<br><small>Tap the words to listen!</small>",
+		"alist": [
+			{
+				"context": "Demo Video",
+				"url": "https://vimeo.com/883143318?share=copy"
+			},
+			{
+				"context": "Technical Support",
+				"url": "https://languagetogether.com/pages/flashcards-support"
+			}
+		],
+		"floders": [
+			{
+				"title": "Family Morning",
+				"unit": "Cards 1-10",
+				"img": "https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1696012855-lt_the_fam.jpg&w=256&q=75"
+			}
+		]
+	}
+}
