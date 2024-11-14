@@ -58,7 +58,29 @@
 			{
 				"title": "Family Morning",
 				"unit": "Cards 1-10",
-				"img": "https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1696012855-lt_the_fam.jpg&w=256&q=75"
+				"img": "https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1696012855-lt_the_fam.jpg&w=256&q=75",
+				"cards": [
+					{
+						"imgUrl": "https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1696001440-fm_01_s1.jpg&w=640&q=75",
+						"content": [
+							{
+								"language": "Spanish",
+								"wordAudioUrl": "https://www.datocms-assets.com/106329/1694864030-fm_01_spa1_w1.mp3",
+								"word": "<span>la <strong style=\"color: #739E94\">casa</strong></span>",
+								"sentence": "<span>Esta es mi <strong style=\"color: #739E94\">casa</strong></span>",
+								"sentenceAudioUrl": "https://www.datocms-assets.com/106329/1694864126-fm_01_spa1_ex1.mp3"
+							},
+							{},
+							{
+								"language": "English",
+								"wordAudioUrl": "https://www.datocms-assets.com/106329/1694863991-fm_01_eng1_w1.mp3",
+								"word": "<span><strong style=\"color: #739E94\">house</strong></span>",
+								"sentence": "<span>This is my <strong style=\"color: #739E94\">house</strong></span>",
+								"sentenceAudioUrl": "https://www.datocms-assets.com/106329/1694864085-fm_01_eng1_ex1.mp3"
+							}
+						]
+					}
+				]
 			}
 		]
 	}
