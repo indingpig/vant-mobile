@@ -5,4 +5,23 @@
 .font-sise-26 {
 	font-size: 26px;
 }
-// #FAF3E6 0%, #F2EADA 100%
+
+$language-contents: (
+  "spanish": "ES",
+  "english": "EN"
+);
+
+@each $lang, $content in $language-contents {
+  .#{$lang} {
+    &:before {
+      content: "#{$content}";
+      border: 1px solid var(--vt-c-indigo);
+      font-size: 12px;
+      border-radius: 50%;
+      padding: 2px;
+      position: relative;
+      right: 10px;
+      top: -3px;
+    }
+  }
+}

@@ -17,6 +17,7 @@ export default {
 			},
 			gray: {
 				'500': 'rgb(107 114 128/var(--tw-text-opacity));',
+				'200': 'rgb(229 231 235/var(--tw-bg-opacity));'
 			}
 		}
   },
