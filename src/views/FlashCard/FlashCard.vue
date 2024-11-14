@@ -56,17 +56,17 @@
 				<div class="relative mx-auto w-full" style="max-width:calc(100% - env(safe-area-inset-right) - env(safe-area-inset-left))">
 					<div class="mx-auto w-full sm:max-w-5xl">
 						<ul class="snap-y snap-mandatory overflow-y-auto">
-							<li>
+							<li v-for="(item, index) in pageConfig.subject?.floders" :key="index">
 								<div class="m-2">
 									<!-- 目录名 -->
 									<div class="flex w-full select-none items-center justify-between rounded bg-white rounded-b-none">
 										<div class="flex flex-row items-center gap-2 p-2">
 											<div class="h-[75px] w-[104px] rounded">
-												<img src="https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1696012855-lt_the_fam.jpg&w=256&q=75" alt="Family Morning" class="rounded">
+												<img v-lazy="item.img" :alt="item.title" class="rounded">
 											</div>
 											<div class="flex flex-col justify-start text-left">
-												<span class="text-lg font-semibold">Family Morning</span>
-												<span class="text-sm uppercase text-gray-500">Cards 1-10</span>
+												<span class="text-lg font-semibold">{{ item.title }}</span>
+												<span class="text-sm uppercase text-gray-500">{{ item.unit }}</span>
 											</div>
 										</div>
 										<i class="flex items-center justify-center mr-2 h-8 w-8 text-lt-blue transition-transform iconfont font-sise-26 icon-tianjia"
@@ -75,54 +75,7 @@
 										</i>
 									</div>
 									<!-- 卡片 -->
-									<div class="select-none overflow-hidden rounded-b bg-lt-blue">
-										<div>
-											<div class="relative w-full py-4 flex justify-center">
-												<div class="h-[456px] w-[320px] px-2">
-													<div class="h-full w-full rounded bg-white hover:cursor-pointer">
-														<div class="flex h-full w-full flex-col items-center gap-2">
-															<!-- 卡片图片与播放 -->
-															<div class="w-full flex-auto overflow-hidden">
-																<div class="flex h-full w-full flex-col items-center overflow-auto">
-																	<!-- 图片 -->
-																	<div class="flex flex-shrink-0 flex-grow items-center outline-none">
-																		<img src="https://app.languagetogether.com/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1696001440-fm_01_s1.jpg&w=640&q=75" alt="">
-																	</div>
-																	<!-- 播放 -->
-																	<div class="w-full flex-auto flex-grow max-h-[200px]">
-																		<div class="flex h-full w-full flex-auto flex-col items-center justify-between px-4">
-																			<div class="flex w-full flex-auto flex-col items-center justify-center gap-2">
-																				<div class="flex flex-1 flex-row items-center justify-end">
-																					<div>
-																						<audio src="https://www.datocms-assets.com/106329/1694864030-fm_01_spa1_w1.mp3"></audio>
-																						<button type="button" class="text-black audio-btn disabled:opacity-50">
-																							<p class="text-center text-current text-3xl">
-																								<span>la <strong style="color: #739E94">casa</strong></span>
-																							</p>
-																						</button>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<!-- 按钮 -->
-															<div class="flex flex-row items-center justify-center gap-2">
-																<i class="flex items-center justify-center h-8 w-8 text-lt-blue iconfont font-sise-26 icon-xiangzuo">
-																</i>
-																<div class="m-2">
-																	<span class="inline-flex h-8 w-8 items-center justify-center text-sm text-gray-400">1</span>
-																</div>
-																<i class="flex items-center justify-center h-8 w-8 text-lt-blue iconfont font-sise-26 icon-xiangyou">
-																</i>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+									<Card :content="item.cards[0]"/>
 								</div>
 							</li>
 						</ul>
@@ -135,23 +88,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
+import type { ListItem, MediaItem, Subject } from '@/types/FlashCard.d.ts';
+import Card from './Card.vue';
 import DATA from './testData.json';
 const host = 'https://app.languagetogether.com';
 const logoUrl = ref(host + '/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1697827832-language-together-image.svg&w=384&q=75');
-interface ListItem {
-	context: string;
-	url: string;
-}
-
-interface MediaItem extends ListItem {
-	imageUrl: string;
-}
-
-interface Subject {
-	imgSub?: ListItem;
-	alist?: ListItem[];
-	h1: string;
-}
 
 const pageConfig = reactive({
 	title: 'Flashcard',
