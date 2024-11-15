@@ -8,11 +8,11 @@ export interface MediaItem extends ListItem {
 }
 
 export interface CardContent {
-	language: string;
-	wordAudioUrl: string;
-	sentenceAudioUrl: string;
-	word: string;
-	sentence: string;
+	language?: string;
+	wordAudioUrl?: string;
+	sentenceAudioUrl?: string;
+	word?: string;
+	sentence?: string;
 }
 
 export interface Card {

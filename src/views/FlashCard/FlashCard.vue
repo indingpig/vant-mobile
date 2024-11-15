@@ -59,7 +59,8 @@
 							<li v-for="(item, index) in pageConfig.subject?.floders" :key="index">
 								<div class="m-2">
 									<!-- 目录名 -->
-									<div class="flex w-full select-none items-center justify-between rounded bg-white rounded-b-none">
+									<div class="flex w-full select-none items-center justify-between rounded bg-white rounded-b-none"
+										@click="handleOpenClick(index)">
 										<div class="flex flex-row items-center gap-2 p-2">
 											<div class="h-[75px] w-[104px] rounded">
 												<img v-lazy="item.img" :alt="item.title" class="rounded">
@@ -70,12 +71,15 @@
 											</div>
 										</div>
 										<i class="flex items-center justify-center mr-2 h-8 w-8 text-lt-blue transition-transform iconfont font-sise-26 icon-tianjia"
-											@click="handleOpenClick"
-											:class="{ 'rotate-45': openInt, 'transform': openInt }">
+											:class="{ 'rotate-45': openIndex === index, 'transform': openIndex === index }">
 										</i>
 									</div>
 									<!-- 卡片 -->
-									<Card :content="item.cards[0]"/>
+									<Transition name="accordion-transition">
+										<Card :content="item.cards[0]" v-show="openIndex === index" />
+										<!-- <div class="overflow-hidden">
+										</div> -->
+									</Transition>
 								</div>
 							</li>
 						</ul>
@@ -102,14 +106,14 @@ const pageConfig = reactive({
 	subject: {} as Subject | undefined,
 });
 
-const openInt = ref(false);
+const openIndex = ref<number | null>();
 
 const hanleMenuClick = () => {
 	pageConfig.showMenu = !pageConfig.showMenu;
 };
 
-const handleOpenClick = () => {
-	openInt.value = !openInt.value;
+const handleOpenClick = (index: number) => {
+	openIndex.value = openIndex.value === index ? null : index; // 打开当前项
 };
 
 const init = () => {
@@ -135,5 +139,14 @@ onMounted(() => {
 .slide-down-enter-to, .slide-down-leave-from {
   transform: translateY(0);
   // opacity: 1;
+}
+.accordion-transition-enter-active, .accordion-transition-leave-active {
+  transition: max-height 0.5s ease;
+}
+.accordion-transition-enter-from, .accordion-transition-leave-to {
+  max-height: 0;
+}
+.accordion-transition-enter-to, .accordion-transition-leave-from {
+  max-height: 536px; /* 这里设置为你内容的最大高度 */
 }
 </style>
