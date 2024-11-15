@@ -84,6 +84,8 @@ defineProps({
 	}
 });
 
+const emits = defineEmits(['prev-card', 'next-card']);
+
 const wordClass = ref('flex w-full flex-auto flex-col items-center justify-center gap-2');
 
 const progressClass = ref('h-0.5 w-full bg-gray-200');
@@ -95,10 +97,10 @@ const updateProgress = (progress: number) => {
 };
 
 const prevCard = () => {
-	console.log('prevCard');
+	emits('prev-card');
 };
 const nextCard = () => {
-	console.log('nextCard');
+	emits('next-card');
 };
 
 </script>

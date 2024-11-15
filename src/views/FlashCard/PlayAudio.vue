@@ -10,7 +10,7 @@
 					'icon-english-filled': languageIcon === 'English'
 				}"
 			></i>
-			<p class="text-center text-current text-xl" v-html="sentence"></p>
+			<p class="text-center text-current text-base" v-html="sentence"></p>
 		</button>
 	</div>
 </template>

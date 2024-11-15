@@ -76,9 +76,12 @@
 									</div>
 									<!-- 卡片 -->
 									<Transition name="accordion-transition">
-										<Card :content="item.cards[0]" v-show="openIndex === index" />
-										<!-- <div class="overflow-hidden">
-										</div> -->
+										<Card
+											:content="item.cards[currentCardIndex]"
+											v-if="openIndex === index"
+											@next-card="handleNextCard"
+											@prev-card="handlePrevCard"
+										/>
 									</Transition>
 								</div>
 							</li>
@@ -108,12 +111,38 @@ const pageConfig = reactive({
 
 const openIndex = ref<number | null>();
 
+const currentCardIndex = ref(0);
+
+const maxCardLength = ref(0);
+
 const hanleMenuClick = () => {
 	pageConfig.showMenu = !pageConfig.showMenu;
 };
 
 const handleOpenClick = (index: number) => {
 	openIndex.value = openIndex.value === index ? null : index; // 打开当前项
+	currentCardIndex.value = 0;
+	if (openIndex.value !== null) {
+		maxCardLength.value = pageConfig.subject?.floders[index].cards.length || 0;
+	} else {
+		maxCardLength.value = 0;
+	}
+};
+
+const handleNextCard = () => {
+	if (currentCardIndex.value === maxCardLength.value - 1) {
+		currentCardIndex.value = 0;
+		return;
+	}
+	currentCardIndex.value += 1;
+};
+
+const handlePrevCard = () => {
+	if (currentCardIndex.value === 0) {
+		currentCardIndex.value = maxCardLength.value - 1;
+		return;
+	}
+	currentCardIndex.value -= 1;
 };
 
 const init = () => {
