@@ -81,6 +81,7 @@
 											v-if="openIndex === index"
 											@next-card="handleNextCard"
 											@prev-card="handlePrevCard"
+											:page-num="currentCardIndex + 1"
 										/>
 									</Transition>
 								</div>
@@ -90,12 +91,17 @@
 				</div>
 			</div>
 		</main>
+		<footer class="relative h-40 w-full bg-lt-blue">
+			<AD :api="flashAPiString.adUrl"/>
+		</footer>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
 import type { ListItem, MediaItem, Subject } from '@/types/FlashCard.d.ts';
+import { flashAPiString } from '@/server/api/FlashCardApi';
+import AD from './AD.vue';
 import Card from './Card.vue';
 import DATA from './testData.json';
 const host = 'https://app.languagetogether.com';

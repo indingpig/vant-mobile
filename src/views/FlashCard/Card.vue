@@ -60,7 +60,7 @@
 						<div class="flex flex-row items-center justify-center gap-2">
 							<i class="flex items-center justify-center h-8 w-8 text-lt-blue iconfont font-sise-26 icon-xiangzuo" @click="prevCard">
 							</i>
-							<span class="inline-flex h-8 w-8 items-center justify-center text-sm text-gray-400">1</span>
+							<span class="inline-flex h-8 w-8 items-center justify-center text-sm text-gray-400">{{ pageNum }}</span>
 							<i class="flex items-center justify-center h-8 w-8 text-lt-blue iconfont font-sise-26 icon-xiangyou" @click="nextCard">
 							</i>
 						</div>
@@ -81,6 +81,10 @@ defineProps({
 	content: {
 		type: Object as PropType<Card>,
 		required: true,
+	},
+	pageNum: {
+		type: Number,
+		default: 1,
 	}
 });
 
