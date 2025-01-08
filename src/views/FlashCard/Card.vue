@@ -18,7 +18,7 @@
 											<!-- {{ index }} -->
 											<div class="flex flex-row items-center justify-end" v-if="index === 0">
 												<PlayAudio
-													:AudioUrl="item.wordAudioUrl"
+													:MediaUrl="item.wordAudioUrl"
 													:sentence="item.word"
 													:languageIcon="item.language"
 													:showIcon="true"
@@ -26,7 +26,7 @@
 												/>
 												<p>. </p>
 												<PlayAudio
-													:AudioUrl="item.sentenceAudioUrl"
+													:MediaUrl="item.sentenceAudioUrl"
 													:sentence="item.sentence"
 													:languageIcon="item.language"
 													:showIcon="false"
@@ -36,7 +36,7 @@
 											<div class="h-0.5 w-0 bg-lt-blue" v-if="(index + 1) % 2 === 0" :style="{ width: progressWidth + '%' }"></div>
 											<div class="flex flex-row items-center justify-end" v-if="index === 2">
 												<PlayAudio
-													:AudioUrl="item.wordAudioUrl"
+													:MediaUrl="item.wordAudioUrl"
 													:sentence="item.word"
 													:languageIcon="item.language"
 													:showIcon="true"
@@ -44,7 +44,7 @@
 												/>
 												<p>. </p>
 												<PlayAudio
-													:AudioUrl="item.sentenceAudioUrl"
+													:MediaUrl="item.sentenceAudioUrl"
 													:sentence="item.sentence"
 													:languageIcon="item.language"
 													:showIcon="false"
