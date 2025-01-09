@@ -101,11 +101,14 @@
 import { ref, reactive, onMounted } from 'vue';
 import type { ListItem, MediaItem, Subject } from '@/types/FlashCard.d.ts';
 import { flashAPiString } from '@/server/api/FlashCardApi';
+import { useRoute } from 'vue-router';
+import { getFlashCardListApi } from '@/server/api/FlashCardApi';
 import AD from './AD.vue';
 import Card from './Card.vue';
 import DATA from './testData.json';
 const host = 'https://app.languagetogether.com';
 const logoUrl = ref(host + '/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1697827832-language-together-image.svg&w=384&q=75');
+const Route = useRoute();
 
 const pageConfig = reactive({
 	title: 'Flashcard',
@@ -152,6 +155,14 @@ const handlePrevCard = () => {
 };
 
 const init = () => {
+	const subjectId = Route.query.subjectId as string;
+	if (!subjectId) {
+		return;
+	}
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	getFlashCardListApi(subjectId).then((res: any) => {
+		console.log(res);
+	});
 	pageConfig.aList = DATA.aList;
 	pageConfig.mediaList = DATA.mediaList;
 	pageConfig.subject = DATA.subject;

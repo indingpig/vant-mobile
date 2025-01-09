@@ -4,11 +4,10 @@ export const flashAPiString = {
 	adUrl: '/flashCard/ad',
 };
 
-export function getFlashCardList(params: unknown) {
+export function getFlashCardListApi(subjectId: string) {
 	return request({
-		url: '/flashCard/list',
-		method: 'get',
-		params,
+		url: '/business/subject/{subjectId}'.replace('{subjectId}', subjectId as string),
+		method: 'get'
 	});
 }
 
