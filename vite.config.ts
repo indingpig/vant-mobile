@@ -18,10 +18,20 @@ export default defineConfig({
   },
 	server: {
 		proxy: {
-			'/api': {
-				target: 'http://localhost:8080',
+			'/api/v1': {
+				// target: 'http://localhost:8080',
+				target: "https://config.grandlmoon.com",
 				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, '')
+				secure: false,
+				// rewrite: (path) => path.replace(/^\/api/, '')
+			},
+			'/profile/upload': {
+				// target: 'http://localhost:8080',
+				// https://config.grandlmoon.com/profile/upload/2025/01/13/%E4%B8%BB%E5%9B%BE%E4%BF%AE%E6%94%B9%E7%89%88_20250113103614A005.jpg
+				target: "https://config.grandlmoon.com",
+				changeOrigin: true,
+				secure: false,
+				// rewrite: (path) => path.replace(/^\/api/, '')
 			}
 		}
 	},
