@@ -9,12 +9,12 @@
 							<div class="flex h-full w-full flex-col items-center overflow-auto">
 								<!-- 图片 -->
 								<div class="flex flex-shrink-0 flex-grow items-center outline-none mx-10">
-									<img v-lazy="content.imgUrl" alt="">
+									<img v-lazy="content.contentImg" alt="">
 								</div>
 								<!-- 播放 -->
 								<div class="w-full flex-auto flex-grow max-h-[200px]">
 									<div class="flex h-full w-full flex-auto flex-col items-center justify-between px-4">
-										<div :class="[item.language ? wordClass : progressClass]" v-for="(item, index) in content.content" :key="index">
+										<div :class="[item.language ? wordClass : progressClass]" v-for="(item, index) in content.mediaList" :key="index">
 											<!-- {{ index }} -->
 											<div class="flex flex-row items-center justify-end" v-if="index === 0">
 												<PlayAudio

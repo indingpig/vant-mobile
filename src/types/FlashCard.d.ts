@@ -1,6 +1,7 @@
 export interface ListItem {
 	context: string;
 	url: string;
+	subjectImg?: string;
 }
 
 export interface MediaItem extends ListItem {
@@ -16,20 +17,24 @@ export interface CardContent {
 }
 
 export interface Card {
-	imgUrl: string;
-	content: CardContent[];
+	contentImg: string;
+	mediaList: CardContent[];
 }
 
 export interface FloderItem {
 	title: string;
+	catalogName: string;
 	unit: string;
-	img: string;
-	cards: Card[];
+	catalogDesc: string;
+	catalogImg: string;
+	contentList: Card[];
 }
 
 export interface Subject {
 	imgSub?: ListItem;
 	alist?: ListItem[];
-	h1: string;
-	floders: FloderItem[];
+	subjectDesc: string;
+	subjectImg: string;
+	context: string;
+	catalogList: FloderItem[];
 }

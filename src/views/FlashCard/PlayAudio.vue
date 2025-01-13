@@ -110,17 +110,17 @@ const enterFullscreen = (ele: HTMLVideoElement) => {
 	}
 };
 
-const exitFullscreen = () => {
-	if (document.exitFullscreen) {
-		document.exitFullscreen();
-	} else if (document.mozCancelFullScreen) {
-		document.mozCancelFullScreen();
-	} else if (document.webkitExitFullscreen) {
-		document.webkitExitFullscreen();
-	} else if (document.msExitFullscreen) {
-		document.msExitFullscreen();
-	}
-};
+// const exitFullscreen = () => {
+// 	if (document.exitFullscreen) {
+// 		document.exitFullscreen();
+// 	} else if (document.mozCancelFullScreen) {
+// 		document.mozCancelFullScreen();
+// 	} else if (document.webkitExitFullscreen) {
+// 		document.webkitExitFullscreen();
+// 	} else if (document.msExitFullscreen) {
+// 		document.msExitFullscreen();
+// 	}
+// };
 
 const destroyVideoElement = () => {
 	if (videoEle) {

@@ -38,10 +38,10 @@
 					<div class="mx-auto w-full sm:max-w-5xl">
 						<div class="flex w-full max-w-[450px] flex-row items-center gap-4 sm:max-w-sm">
 							<div class="w-[150px] shrink-0 grow-0 sm:w-[175px]">
-								<img v-lazy="pageConfig.subject?.imgSub?.url" :alt="pageConfig.subject?.imgSub?.context" decoding="async">
+								<img v-lazy="pageConfig.subject?.subjectImg" :alt="pageConfig.subject?.context" decoding="async">
 							</div>
 							<div class="flex w-full flex-auto flex-col gap-2 sm:gap-4">
-								<h1 class="text-xl font-extrabold sm:text-2xl" v-html="pageConfig.subject?.h1"></h1>
+								<h1 class="text-xl font-extrabold sm:text-2xl" v-html="pageConfig.subject?.subjectDesc"></h1>
 								<div class="flex flex-col gap-1 text-left font-semibold text-lt-blue sm:flex-row sm:gap-1.5">
 									<a v-for="item in pageConfig.subject?.alist"
 										:key="item.url" :href="item.url"
@@ -56,18 +56,18 @@
 				<div class="relative mx-auto w-full" style="max-width:calc(100% - env(safe-area-inset-right) - env(safe-area-inset-left))">
 					<div class="mx-auto w-full sm:max-w-5xl">
 						<ul class="snap-y snap-mandatory overflow-y-auto">
-							<li v-for="(item, index) in pageConfig.subject?.floders" :key="index">
+							<li v-for="(item, index) in pageConfig.subject?.catalogList" :key="index">
 								<div class="m-2">
 									<!-- 目录名 -->
 									<div class="flex w-full select-none items-center justify-between rounded bg-white rounded-b-none"
 										@click="handleOpenClick(index)">
 										<div class="flex flex-row items-center gap-2 p-2">
 											<div class="h-[75px] w-[104px] rounded">
-												<img v-lazy="item.img" :alt="item.title" class="rounded">
+												<img v-lazy="item.catalogImg" :alt="item.catalogName" class="rounded h-full w-full" decoding="async">
 											</div>
 											<div class="flex flex-col justify-start text-left">
-												<span class="text-lg font-semibold">{{ item.title }}</span>
-												<span class="text-sm uppercase text-gray-500">{{ item.unit }}</span>
+												<span class="text-lg font-semibold">{{ item.catalogName }}</span>
+												<span class="text-sm uppercase text-gray-500">{{ item.catalogDesc }}</span>
 											</div>
 										</div>
 										<i class="flex items-center justify-center mr-2 h-8 w-8 text-lt-blue transition-transform iconfont font-sise-26 icon-tianjia"
@@ -77,7 +77,7 @@
 									<!-- 卡片 -->
 									<Transition name="accordion-transition">
 										<Card
-											:content="item.cards[currentCardIndex]"
+											:content="item.contentList[currentCardIndex]"
 											v-if="openIndex === index"
 											@next-card="handleNextCard"
 											@prev-card="handlePrevCard"
@@ -99,7 +99,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
-import type { ListItem, MediaItem, Subject } from '@/types/FlashCard.d.ts';
+import type { ListItem, MediaItem, Subject, CardContent } from '@/types/FlashCard.d.ts';
 import { flashAPiString } from '@/server/api/FlashCardApi';
 import { useRoute } from 'vue-router';
 import { getFlashCardListApi } from '@/server/api/FlashCardApi';
@@ -132,7 +132,7 @@ const handleOpenClick = (index: number) => {
 	openIndex.value = openIndex.value === index ? null : index; // 打开当前项
 	currentCardIndex.value = 0;
 	if (openIndex.value !== null) {
-		maxCardLength.value = pageConfig.subject?.floders[index].cards.length || 0;
+		maxCardLength.value = pageConfig.subject?.catalogList[index].contentList.length || 0;
 	} else {
 		maxCardLength.value = 0;
 	}
@@ -161,11 +161,43 @@ const init = () => {
 	}
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	getFlashCardListApi(subjectId).then((res: any) => {
+		if (res && res.catalogList) {
+			// floders
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			res.catalogList.forEach((item: any) => {
+				if (item.contentList) {
+					// cards
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					item.contentList.forEach((content: any) => {
+						const EnglishWord: CardContent = {
+							language: 'English',
+							wordAudioUrl: content.contentEnVoice,
+							word: content.contentEnName,
+							sentenceAudioUrl: content.enSentencesVoice,
+							sentence: content.contentEnSentences
+						};
+						const SpanishWord: CardContent = {
+							language: 'Spanish',
+							wordAudioUrl: content.contentEsVoice,
+							word: content.contentEsName,
+							sentenceAudioUrl: content.esSentencesVoice,
+							sentence: content.contentEsSentences
+						};
+						content.mediaList = [
+							EnglishWord,
+							{},
+							SpanishWord,
+						];
+					});
+				}
+			});
+		}
 		console.log(res);
+		pageConfig.subject = res;
 	});
 	pageConfig.aList = DATA.aList;
 	pageConfig.mediaList = DATA.mediaList;
-	pageConfig.subject = DATA.subject;
+	// pageConfig.subject = DATA.subject;
 };
 
 onMounted(() => {
