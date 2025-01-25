@@ -25,11 +25,11 @@
 			</Transition>
 			<div class="relative z-50 py-5 flex flex-row items-center justify-between bg-lt-blue px-2 md:shadow">
 				<img v-lazy="logoUrl" decoding="async" alt="" class="max-w-[135.79px]">
-				<button type="button" class="text-white" @click="hanleMenuClick">
+				<!-- <button type="button" class="text-white" @click="hanleMenuClick">
 					<i class="iconfont icon-menu h-6 w-6" v-show="pageConfig.showMenu"></i>
 					<i class="iconfont icon-close h-6 w-6" v-show="!pageConfig.showMenu"></i>
 					<span class="sr-only">Menu</span>
-				</button>
+				</button> -->
 			</div>
 		</header>
 		<main class="overflow-y-scrol h-screen flex-auto overflow-x-hidden bg-linear-bisque">
@@ -124,9 +124,9 @@ const currentCardIndex = ref(0);
 
 const maxCardLength = ref(0);
 
-const hanleMenuClick = () => {
-	pageConfig.showMenu = !pageConfig.showMenu;
-};
+// const hanleMenuClick = () => {
+// 	pageConfig.showMenu = !pageConfig.showMenu;
+// };
 
 const handleOpenClick = (index: number) => {
 	openIndex.value = openIndex.value === index ? null : index; // 打开当前项
