@@ -18,6 +18,7 @@ export interface CardContent {
 
 export interface Card {
 	contentImg: string;
+	contentDesc: string;
 	mediaList: CardContent[];
 }
 
