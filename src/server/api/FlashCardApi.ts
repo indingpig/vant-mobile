@@ -17,3 +17,10 @@ export function getADImgApi(url: string) {
 		method: 'get',
 	});
 }
+
+export function getCompany(userId: string) {
+  return request({
+    url: '/business/company/' + userId,
+    method: 'get'
+  });
+}

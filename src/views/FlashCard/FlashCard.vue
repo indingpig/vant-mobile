@@ -67,7 +67,7 @@
 											</div>
 											<div class="flex flex-col justify-start text-left">
 												<span class="text-lg font-semibold">{{ item.catalogName }}</span>
-												<span class="text-sm uppercase text-gray-500">{{ item.catalogDesc }}</span>
+												<span class="text-sm uppercase text-gray-500" v-html="item.catalogDesc"></span>
 											</div>
 										</div>
 										<i class="flex items-center justify-center mr-2 h-8 w-8 text-lt-blue transition-transform iconfont font-sise-26 icon-tianjia"
@@ -102,7 +102,7 @@ import { ref, reactive, onMounted } from 'vue';
 import type { ListItem, MediaItem, Subject, CardContent } from '@/types/FlashCard.d.ts';
 import { flashAPiString } from '@/server/api/FlashCardApi';
 import { useRoute } from 'vue-router';
-import { getFlashCardListApi } from '@/server/api/FlashCardApi';
+import { getFlashCardListApi, getCompany } from '@/server/api/FlashCardApi';
 import AD from './AD.vue';
 import Card from './Card.vue';
 import DATA from './testData.json';
@@ -154,6 +154,13 @@ const handlePrevCard = () => {
 	currentCardIndex.value -= 1;
 };
 
+const getCompanyList = (companyId: string) => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	getCompany(companyId).then((res: any) => {
+		logoUrl.value = res.companyImg;
+	});
+};
+
 const init = () => {
 	const subjectId = Route.query.subjectId as string;
 	if (!subjectId) {
@@ -194,6 +201,10 @@ const init = () => {
 		}
 		console.log(res);
 		pageConfig.subject = res;
+		const companyId = res.companyId;
+		if (companyId) {
+			getCompanyList(companyId);
+		}
 	});
 	pageConfig.aList = DATA.aList;
 	pageConfig.mediaList = DATA.mediaList;
