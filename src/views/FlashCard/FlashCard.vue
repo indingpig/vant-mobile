@@ -13,7 +13,7 @@
 						</div>
 						<div>
 							<div class="flex flex-row items-center justify-center gap-5 p-4">
-								<a v-for="item in pageConfig.mediaList" :href="item.url"
+								<a v-for="item in pageConfig.wordsList" :href="item.url"
 									:key="item.url"
 									class="h-12 w-12" target="_blank" rel="noreferrer">
 									<img :src="item.imageUrl" :alt="item.context" decoding="async">
@@ -91,30 +91,30 @@
 				</div>
 			</div>
 		</main>
-		<footer class="relative h-40 w-full bg-lt-blue">
-			<AD :api="flashAPiString.adUrl"/>
+		<footer>
+			<AD :subjectId="subjectId"/>
 		</footer>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
-import type { ListItem, MediaItem, Subject, CardContent } from '@/types/FlashCard.d.ts';
-import { flashAPiString } from '@/server/api/FlashCardApi';
+import type { ListItem, MediaItem, Subject } from '@/types/FlashCard.d.ts';
 import { useRoute } from 'vue-router';
 import { getFlashCardListApi, getCompany } from '@/server/api/FlashCardApi';
 import AD from './AD.vue';
 import Card from './Card.vue';
-import DATA from './testData.json';
 const host = 'https://app.languagetogether.com';
 const logoUrl = ref(host + '/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1697827832-language-together-image.svg&w=384&q=75');
 const Route = useRoute();
+
+const subjectId = Route.query.subjectId as string;
 
 const pageConfig = reactive({
 	title: 'Flashcard',
 	showMenu: true,
 	aList: [] as ListItem[],
-	mediaList: [] as MediaItem[],
+	wordsList: [] as MediaItem[],
 	subject: {} as Subject | undefined,
 });
 
@@ -157,57 +157,99 @@ const handlePrevCard = () => {
 const getCompanyList = (companyId: string) => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	getCompany(companyId).then((res: any) => {
-		logoUrl.value = res.companyImg;
+		logoUrl.value = res.data.companyImg;
 	});
 };
 
 const init = () => {
-	const subjectId = Route.query.subjectId as string;
 	if (!subjectId) {
 		return;
 	}
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	getFlashCardListApi(subjectId).then((res: any) => {
-		if (res && res.catalogList) {
-			// floders
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			res.catalogList.forEach((item: any) => {
-				if (item.contentList) {
-					// cards
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					item.contentList.forEach((content: any) => {
-						const EnglishWord: CardContent = {
-							language: 'English',
-							wordAudioUrl: content.contentEnVoice,
-							word: content.contentEnName,
-							sentenceAudioUrl: content.enSentencesVoice,
-							sentence: content.contentEnSentences
-						};
-						const SpanishWord: CardContent = {
-							language: 'Spanish',
-							wordAudioUrl: content.contentEsVoice,
-							word: content.contentEsName,
-							sentenceAudioUrl: content.esSentencesVoice,
-							sentence: content.contentEsSentences
-						};
-						content.mediaList = [
-							EnglishWord,
-							{},
-							SpanishWord,
-						];
-					});
-				}
-			});
-		}
-		console.log(res);
-		pageConfig.subject = res;
-		const companyId = res.companyId;
+		// if (res && res.data.catalogList) {
+		// 	// floders
+		// 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// 	res.data.catalogList.forEach((item: any) => {
+		// 		if (item.contentList) {
+		// 			// cards
+		// 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// 			item.contentList.forEach((content: any) => {
+		// 				content.wordsList = [
+		// 					{
+		// 						wordsText: 'apple',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'English',
+		// 						isWord: '1',
+		// 					},
+		// 					{
+		// 						wordsText: 'This is an apple',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'English',
+		// 						isWord: '2',
+		// 					},
+		// 					{
+		// 						wordsText: 'manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '1',
+		// 					},
+		// 					{
+		// 						wordsText: 'Esto es una manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '2',
+		// 					},
+		// 					{
+		// 						wordsText: 'manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '1',
+		// 					},
+		// 					{
+		// 						wordsText: 'Esto es una manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '2',
+		// 					},
+		// 					{
+		// 						wordsText: 'manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '1',
+		// 					},
+		// 					{
+		// 						wordsText: 'Esto es una manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '2',
+		// 					},
+		// 					{
+		// 						wordsText: 'manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '1',
+		// 					},
+		// 					{
+		// 						wordsText: 'Esto es una manzana',
+		// 						wordsVoice: '',
+		// 						wordsLanguage: 'Spanish',
+		// 						isWord: '2',
+		// 					},
+		// 				];
+		// 			});
+		// 		}
+		// 	});
+		// }
+		console.log(res.data);
+		pageConfig.subject = res.data;
+		const companyId = res.data.companyId;
 		if (companyId) {
 			getCompanyList(companyId);
 		}
 	});
-	pageConfig.aList = DATA.aList;
-	pageConfig.mediaList = DATA.mediaList;
+	// pageConfig.aList = DATA.aList;
+	// pageConfig.wordsList = DATA.wordsList;
 	// pageConfig.subject = DATA.subject;
 };
 

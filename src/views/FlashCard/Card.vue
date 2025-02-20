@@ -13,46 +13,19 @@
 									<img v-lazy="content.contentImg" alt="">
 								</div>
 								<!-- 播放 -->
-								<div class="w-full flex-auto flex-grow max-h-[200px]">
-									<div class="flex h-full w-full flex-auto flex-col items-center justify-between px-4">
-										<div :class="[item.language ? wordClass : progressClass]" v-for="(item, index) in content.mediaList" :key="index">
-											<!-- {{ index }} -->
-											<div class="flex flex-col items-center justify-end" v-if="index === 0">
-												<PlayAudio
-													:MediaUrl="item.wordAudioUrl"
-													:sentence="item.word"
-													:languageIcon="item.language"
-													:showIcon="true"
-													@update-progress="updateProgress"
-												/>
-												<!-- <p>. </p> -->
-												<PlayAudio
-													:MediaUrl="item.sentenceAudioUrl"
-													:sentence="item.sentence"
-													:languageIcon="item.language"
-													:showIcon="false"
-													@update-progress="updateProgress"
-												/>
-											</div>
-											<!-- <div class="h-0.5 w-0 bg-lt-blue" v-if="(index + 1) % 2 === 0" :style="{ width: progressWidth + '%' }"></div> -->
-											<div class="flex flex-col items-center justify-end" v-if="index === 2">
-												<PlayAudio
-													:MediaUrl="item.wordAudioUrl"
-													:sentence="item.word"
-													:languageIcon="item.language"
-													:showIcon="true"
-													@update-progress="updateProgress"
-												/>
-												<!-- <p>. </p> -->
-												<PlayAudio
-													:MediaUrl="item.sentenceAudioUrl"
-													:sentence="item.sentence"
-													:languageIcon="item.language"
-													:showIcon="false"
-													@update-progress="updateProgress"
-												/>
-											</div>
-										</div>
+								<div class="w-full flex-auto flex-grow max-h-[200px] overflow-auto my-4">
+									<div class="flex h-full w-full flex-auto flex-col justify-between px-4">
+										<PlayAudio
+											class="flex w-full flex-auto flex-col justify-center gap-2 my-1"
+											v-for="(item, index) in content.wordsList" :key="index"
+											:MediaUrl="item.wordsVoice"
+											:sentence="item.wordsText"
+											:languageIcon="item.wordsLanguage"
+											:showIcon="true"
+											@update-progress="updateProgress"
+										/>
+										<!-- <div :class="[item.wordsLanguage ? wordClass : progressClass]" v-for="(item, index) in content.wordsList" :key="index">
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -91,9 +64,9 @@ defineProps({
 
 const emits = defineEmits(['prev-card', 'next-card']);
 
-const wordClass = ref('flex w-full flex-auto flex-col items-center justify-center gap-2');
+// const wordClass = ref('flex w-full flex-auto flex-col items-center justify-center gap-2');
 
-const progressClass = ref('h-0.5 w-full bg-gray-200');
+// const progressClass = ref('h-0.5 w-full bg-gray-200');
 
 const progressWidth = ref(0);
 
