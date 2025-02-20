@@ -36,11 +36,14 @@ let animationFrame: number | null = null;
 const progressWidth = ref(0);
 // const tempUrl = ref('');
 const playAudio = () => {
+	if (!props.MediaUrl) return;
 	// 通过MediaUrl判断是音频还是视频
 	const videoList = ['.mp4', '.webm', '.flv', '.avi', '.mov', '.wmv', '.rmvb', '.mkv', '.3gp', '.rm', '.asf', '.divx', '.mpg', '.mpeg', '.mpe', '.ts', '.vob'];
 	if (videoList.some((item) => props.MediaUrl?.endsWith(item))) {
 		playVideo();
 	} else {
+		// 如果还在播放的话，就返回
+		if (audioRef.value?.paused === false) return;
 		audioRef.value?.play();
 	}
 };
