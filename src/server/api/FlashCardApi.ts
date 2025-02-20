@@ -11,9 +11,9 @@ export function getFlashCardListApi(subjectId: string) {
 	});
 }
 
-export function getADImgApi(url: string) {
+export function getADListApi(subjectId: string) {
 	return request({
-		url: url,
+		url: '/business/advertise/subject/{subjectId}'.replace('{subjectId}', subjectId),
 		method: 'get',
 	});
 }
