@@ -30,7 +30,7 @@ service.interceptors.response.use(
 		}
 		// 统一成功码
 		if ([200, '200'].includes(res.code)) {
-			return res.data;
+			return res;
 		}
 		if (res.code && res.code !== 0) {
 			// `token` 过期或者账号已在别处登录
