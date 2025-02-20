@@ -11,7 +11,10 @@
 					'icon-english-filled': languageIcon === 'English'
 				}"
 			></i>
-			<p class="text-center text-current text-base" v-html="sentence"></p>
+			<p class="text-center text-current text-base"
+				v-html="sentence"
+				:class="[isWord ? 'zain-regular' : 'zain-light']"
+			></p>
 		</button>
 	</div>
 </template>
@@ -23,6 +26,7 @@ const props = defineProps({
 	sentence: String,
 	languageIcon: String,
 	showIcon: Boolean,
+	isWord: Boolean,
 });
 
 const emits = defineEmits(['update-progress']);

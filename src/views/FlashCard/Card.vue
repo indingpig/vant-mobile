@@ -22,6 +22,7 @@
 											:sentence="item.wordsText"
 											:languageIcon="item.wordsLanguage"
 											:showIcon="true"
+											:isWord="item.isWord === '1'"
 											@update-progress="updateProgress"
 										/>
 										<!-- <div :class="[item.wordsLanguage ? wordClass : progressClass]" v-for="(item, index) in content.wordsList" :key="index">
