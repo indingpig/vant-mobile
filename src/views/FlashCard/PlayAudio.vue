@@ -8,7 +8,9 @@
 				v-if="showIcon"
 				:class="{
 					'icon-xibanyayu': languageIcon === 'Spanish',
-					'icon-english-filled': languageIcon === 'English'
+					'icon-english-filled': languageIcon === 'English',
+					'text-lt-blue': languageIcon === 'English',
+					'text-lt-orange': languageIcon === 'Spanish',
 				}"
 			></i>
 			<p class="text-center text-current text-base"

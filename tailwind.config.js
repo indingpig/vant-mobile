@@ -13,7 +13,8 @@ export default {
       current: 'currentColor',
       'white': '#ffffff',
 			lt: {
-				blue: 'rgb(22 190 207/var(--tw-bg-opacity));'
+				blue: 'rgb(22 190 207/var(--tw-bg-opacity));',
+				orange: 'rgb(235 92 92/var(--tw-bg-opacity));'
 			},
 			gray: {
 				'500': 'rgb(107 114 128/var(--tw-text-opacity));',
