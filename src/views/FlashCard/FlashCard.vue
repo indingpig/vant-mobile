@@ -24,7 +24,7 @@
 				</div>
 			</Transition>
 			<div class="relative z-50 py-5 flex flex-row items-center justify-between bg-lt-blue px-2 md:shadow">
-				<img v-lazy="logoUrl" decoding="async" alt="" class="max-w-[135.79px]">
+				<img v-lazy="logoUrl" decoding="async" alt="" class="max-h-[50px]">
 				<!-- <button type="button" class="text-white" @click="hanleMenuClick">
 					<i class="iconfont icon-menu h-6 w-6" v-show="pageConfig.showMenu"></i>
 					<i class="iconfont icon-close h-6 w-6" v-show="!pageConfig.showMenu"></i>

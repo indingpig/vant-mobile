@@ -1,5 +1,5 @@
 <template>
-	<div class="relative h-24 w-full bg-lt-blue" :class="{ 'hidden': !imgUrl }">
+	<div class="relative h-24 w-full bg-lt-blue flex" :class="{ 'hidden': !imgUrl }">
 		<img :src="imgUrl" alt="" @click="goToAD" class="ad-image"/>
 	</div>
 </template>
@@ -34,7 +34,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .ad-image {
 	max-height: 100%;
-	object-fit: contain;
+	width: 100%;
 	margin: auto;
 }
 </style>
