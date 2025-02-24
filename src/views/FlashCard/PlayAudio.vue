@@ -69,7 +69,7 @@ const playVideo = () => {
 	videoEle = document.createElement('video');
 	videoEle.src = props.MediaUrl;
 	videoEle.controls = true;
-	videoEle.autoplay = true;
+	// videoEle.autoplay = true;
 	videoEle.style.width = '100%';
 	videoEle.addEventListener('play', handlePlayVideo);
 	videoEle.addEventListener('ended', handleVideoEnded);

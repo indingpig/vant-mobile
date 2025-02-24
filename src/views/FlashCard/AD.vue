@@ -34,7 +34,27 @@ onMounted(() => {
 <style lang="scss" scoped>
 .ad-image {
 	max-height: 100%;
-	width: 100%;
+	width: auto;
 	margin: auto;
+}
+
+@media (max-width: 768px) {
+  .ad-image {
+    width: 100%;
+  }
+}
+
+/* 平板端（768px 到 1024px）的图片宽度设置为 100% */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ad-image {
+    width: 100%;
+  }
+}
+
+/* 平板端（768px 到 1024px）的图片宽度设置为 100% */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ad-image {
+    width: 100%;
+  }
 }
 </style>

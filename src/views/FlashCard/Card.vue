@@ -14,9 +14,8 @@
 								</div>
 								<!-- 播放 -->
 								<div class="w-full flex-auto flex-grow max-h-[200px] overflow-auto my-4">
-									<div class="flex h-full w-full flex-auto flex-col justify-between px-4">
+									<div class="flex h-full w-full flex-auto flex-col justify-start px-4">
 										<PlayAudio
-											class="flex w-full flex-auto flex-col justify-center gap-2 my-1"
 											v-for="(item, index) in wordsList" :key="index"
 											:MediaUrl="item.wordsVoice"
 											:sentence="item.wordsText"
