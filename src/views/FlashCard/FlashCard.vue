@@ -104,8 +104,8 @@ import { useRoute } from 'vue-router';
 import { getFlashCardListApi, getCompany } from '@/server/api/FlashCardApi';
 import AD from './AD.vue';
 import Card from './Card.vue';
-const host = 'https://app.languagetogether.com';
-const logoUrl = ref(host + '/flashcard/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F106329%2F1697827832-language-together-image.svg&w=384&q=75');
+// const host = 'https://app.languagetogether.com';
+const logoUrl = ref<string>();
 const Route = useRoute();
 
 const subjectId = Route.query.subjectId as string;
