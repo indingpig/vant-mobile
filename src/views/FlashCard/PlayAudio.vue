@@ -34,7 +34,6 @@ const props = defineProps({
 const emits = defineEmits(['update-progress']);
 
 const audioRef = ref<HTMLAudioElement | null>(null);
-const mediaRef = ref<HTMLVideoElement | null>(null);
 const playDisabled = ref(false);
 let videoEle: HTMLVideoElement | null = null;
 let videoContainer: HTMLDivElement | null = null;
@@ -62,7 +61,11 @@ const playVideo = () => {
 	if (!props.MediaUrl) return;
 	videoContainer = document.createElement('div');
 	videoContainer.style.width = '100%';
-	videoContainer.classList.add('fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'bg-black', 'z-50', 'flex', 'items-center', 'justify-center');
+	videoContainer.style.position = 'fixed';
+	videoContainer.style.top = '0';
+	videoContainer.style.left = '0';
+	videoContainer.style.zIndex = '9999';
+	videoContainer.style.width = '100%';
 	videoEle = document.createElement('video');
 	videoEle.src = props.MediaUrl;
 	videoEle.controls = true;
@@ -70,15 +73,13 @@ const playVideo = () => {
 	videoEle.style.width = '100%';
 	videoEle.addEventListener('play', handlePlayVideo);
 	videoEle.addEventListener('ended', handleVideoEnded);
-	videoEle.addEventListener('fullscreenchange', handleFullscreenChange);
 	videoContainer.appendChild(videoEle);
 	document.body.appendChild(videoContainer);
-	enterFullscreen(videoEle);
 	addCloseButton();
 };
 
 const addCloseButton = () => {
-	const closeBtn = document.createElement('button');
+	const closeBtn = document.createElement('X');
 	closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
 	closeBtn.classList.add('video-close-btn');
 	closeBtn.addEventListener('click', destroyVideoElement);
@@ -98,45 +99,12 @@ const handleVideoEnded = () => {
 	}
 };
 
-const handleFullscreenChange = () => {
-	if (!document.fullscreenElement) {
-		destroyVideoElement();
-	}
-};
-
-const enterFullscreen = (ele: HTMLVideoElement) => {
-	const video = ele || mediaRef.value;
-	if (video) {
-		if (video.requestFullscreen) {
-			video.requestFullscreen();
-		} else if (video.mozRequestFullScreen) {
-			video.mozRequestFullScreen();
-		} else if (video.webkitRequestFullscreen) {
-			video.webkitRequestFullscreen();
-		} else if (video.msRequestFullscreen) {
-			video.msRequestFullscreen();
-		}
-	}
-};
-
-// const exitFullscreen = () => {
-// 	if (document.exitFullscreen) {
-// 		document.exitFullscreen();
-// 	} else if (document.mozCancelFullScreen) {
-// 		document.mozCancelFullScreen();
-// 	} else if (document.webkitExitFullscreen) {
-// 		document.webkitExitFullscreen();
-// 	} else if (document.msExitFullscreen) {
-// 		document.msExitFullscreen();
-// 	}
-// };
 
 const destroyVideoElement = () => {
 	if (videoEle) {
 		videoEle.pause();
 		videoEle.removeEventListener('play', handlePlayVideo);
 		videoEle.removeEventListener('ended', handleVideoEnded);
-		videoEle.removeEventListener('fullscreenchange', handleFullscreenChange);
 		videoContainer?.removeChild(videoEle);
 		if (videoContainer) {
 			document.body.removeChild(videoContainer);
