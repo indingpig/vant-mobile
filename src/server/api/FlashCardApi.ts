@@ -11,6 +11,13 @@ export function getFlashCardListApi(subjectId: string) {
 	});
 }
 
+export function getContentApi(contentId: string) {
+  return request({
+    url: "/business/content/{contentIds}".replace('{contentIds}', contentId),
+    method: "get"
+  });
+}
+
 export function getADListApi(subjectId: string) {
 	return request({
 		url: '/business/advertise/subject/{subjectId}'.replace('{subjectId}', subjectId),

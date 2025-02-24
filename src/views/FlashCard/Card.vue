@@ -17,7 +17,7 @@
 									<div class="flex h-full w-full flex-auto flex-col justify-between px-4">
 										<PlayAudio
 											class="flex w-full flex-auto flex-col justify-center gap-2 my-1"
-											v-for="(item, index) in content.wordsList" :key="index"
+											v-for="(item, index) in wordsList" :key="index"
 											:MediaUrl="item.wordsVoice"
 											:sentence="item.wordsText"
 											:languageIcon="item.wordsLanguage"
@@ -49,10 +49,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType } from 'vue';
+import { onMounted, ref, watchEffect, type PropType } from 'vue';
 import type { Card } from '@/types/FlashCard.d.ts';
+import {getContentApi} from '@/server/api/FlashCardApi';
 import PlayAudio from './PlayAudio.vue';
-defineProps({
+const props = defineProps({
 	content: {
 		type: Object as PropType<Card>,
 		required: true,
@@ -62,6 +63,8 @@ defineProps({
 		default: 1,
 	}
 });
+
+const wordsList = ref();
 
 const emits = defineEmits(['prev-card', 'next-card']);
 
@@ -81,6 +84,21 @@ const prevCard = () => {
 const nextCard = () => {
 	emits('next-card');
 };
+
+const getWordsList = (contentId: string) => {
+	wordsList.value = [];
+	getContentApi(contentId).then((res) => {
+		wordsList.value = res.data.wordsList;
+	});
+};
+
+watchEffect(() => {
+	getWordsList(props.content.contentId);
+});
+
+// onMounted(() => {
+// 	getWordsList();
+// });
 
 </script>
 

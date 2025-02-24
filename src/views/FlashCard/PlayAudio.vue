@@ -79,7 +79,8 @@ const playVideo = () => {
 };
 
 const addCloseButton = () => {
-	const closeBtn = document.createElement('X');
+	const closeBtn = document.createElement('div');
+	closeBtn.innerText = 'X';
 	closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
 	closeBtn.classList.add('video-close-btn');
 	closeBtn.addEventListener('click', destroyVideoElement);

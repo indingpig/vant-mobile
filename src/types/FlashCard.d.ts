@@ -32,6 +32,7 @@ interface BusinessWordsInfo {
 export interface Card {
 	contentImg: string;
 	contentDesc: string;
+	contentId: string;
 	wordsList: BusinessWordsInfo[];
 }
 
