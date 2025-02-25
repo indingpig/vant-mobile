@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watchEffect, type PropType } from 'vue';
+import { ref, watchEffect, type PropType } from 'vue';
 import type { Card } from '@/types/FlashCard.d.ts';
 import {getContentApi} from '@/server/api/FlashCardApi';
 import PlayAudio from './PlayAudio.vue';

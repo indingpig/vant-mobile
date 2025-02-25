@@ -1,6 +1,6 @@
 <template>
-	<div class="relative h-24 w-full bg-lt-blue flex" :class="{ 'hidden': !imgUrl }">
-		<img :src="imgUrl" alt="" @click="goToAD" class="ad-image"/>
+	<div class="relative h-24 w-full bg-lt-blue flex pc-ad" :class="{ 'hidden': !imgUrl }" @click="goToAD" >
+		<img :src="imgUrl" alt="" class="ad-image"/>
 	</div>
 </template>
 
@@ -37,11 +37,18 @@ onMounted(() => {
 	width: auto;
 	margin: auto;
 }
+.pc-ad {
+	height: 12rem;
+	cursor: pointer;
+}
 
 @media (max-width: 768px) {
   .ad-image {
     width: 100%;
   }
+	.pc-ad {
+		height: 6rem;
+	}
 }
 
 /* 平板端（768px 到 1024px）的图片宽度设置为 100% */
@@ -49,12 +56,8 @@ onMounted(() => {
   .ad-image {
     width: 100%;
   }
-}
-
-/* 平板端（768px 到 1024px）的图片宽度设置为 100% */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .ad-image {
-    width: 100%;
-  }
+	.pc-ad {
+		height: 6rem;
+	}
 }
 </style>

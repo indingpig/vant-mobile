@@ -36,7 +36,8 @@
 			<div class="flex flex-col">
 				<div class="mx-2 mb-2 mt-4">
 					<div class="mx-auto w-full sm:max-w-5xl">
-						<div class="flex w-full max-w-[450px] flex-row items-center gap-4 sm:max-w-sm">
+						<!-- sm:max-w-sm max-w-[450px] -->
+						<div class="flex w-full flex-row items-center gap-4">
 							<div class="w-[150px] shrink-0 grow-0 sm:w-[175px]">
 								<img v-lazy="pageConfig.subject?.subjectImg" :alt="pageConfig.subject?.context" decoding="async">
 							</div>
