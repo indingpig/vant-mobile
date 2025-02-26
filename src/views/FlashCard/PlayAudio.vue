@@ -62,6 +62,7 @@ const playAudio = () => {
 		// 如果还在播放的话，就返回
 		if (audioRef.value?.paused === false) return;
 		audioRef.value?.play();
+		return;
 	}
 	downLoadFile(props.MediaUrl);
 };
