@@ -47,84 +47,25 @@ const playDisabled = ref(false);
 // let videoContainer: HTMLDivElement | null = null;
 let animationFrame: number | null = null;
 const progressWidth = ref(0);
-const { showModal, videoUrl, closeVideo } = useVideo();
+const { showModal, videoUrl, closeVideo, downLoadFile } = useVideo();
 // const tempUrl = ref('');
 const playAudio = () => {
 	if (!props.MediaUrl) return;
 	// 通过MediaUrl判断是音频还是视频
 	const videoList = ['.mp4', '.webm', '.flv', '.avi', '.mov', '.wmv', '.rmvb', '.mkv', '.3gp', '.rm', '.asf', '.divx', '.mpg', '.mpeg', '.mpe', '.ts', '.vob'];
 	if (videoList.some((item) => props.MediaUrl?.endsWith(item))) {
-		// playVideo();
 		videoUrl.value = props.MediaUrl;
 		showModal.value = true;
-	} else {
+		return;
+	}
+	if (props.MediaUrl.endsWith('.mp3')) {
 		// 如果还在播放的话，就返回
 		if (audioRef.value?.paused === false) return;
 		audioRef.value?.play();
 	}
+	downLoadFile(props.MediaUrl);
 };
 
-// const playVideo = () => {
-// 	if (videoEle) {
-// 		videoEle.play();
-// 		return;
-// 	}
-// 	if (!props.MediaUrl) return;
-// 	videoContainer = document.createElement('div');
-// 	videoContainer.style.width = '100%';
-// 	videoContainer.style.position = 'fixed';
-// 	videoContainer.style.top = '0';
-// 	videoContainer.style.left = '0';
-// 	videoContainer.style.zIndex = '9999';
-// 	videoContainer.style.width = '100%';
-// 	videoEle = document.createElement('video');
-// 	videoEle.src = props.MediaUrl;
-// 	videoEle.controls = true;
-// 	// videoEle.autoplay = true;
-// 	videoEle.style.width = '100%';
-// 	videoEle.addEventListener('play', handlePlayVideo);
-// 	videoEle.addEventListener('ended', handleVideoEnded);
-// 	videoContainer.appendChild(videoEle);
-// 	document.body.appendChild(videoContainer);
-// 	addCloseButton();
-// };
-
-// const addCloseButton = () => {
-// 	const closeBtn = document.createElement('div');
-// 	closeBtn.innerText = 'X';
-// 	closeBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-// 	closeBtn.classList.add('video-close-btn');
-// 	closeBtn.addEventListener('click', destroyVideoElement);
-// 	videoContainer?.appendChild(closeBtn);
-// };
-
-// const handlePlayVideo = () => {
-// 	if (videoEle) {
-// 		videoEle.play();
-// 	}
-// };
-
-// const handleVideoEnded = () => {
-// 	if (videoEle) {
-// 		videoEle.pause();
-// 		videoEle.currentTime = 0;
-// 	}
-// };
-
-
-// const destroyVideoElement = () => {
-// 	if (videoEle) {
-// 		videoEle.pause();
-// 		videoEle.removeEventListener('play', handlePlayVideo);
-// 		videoEle.removeEventListener('ended', handleVideoEnded);
-// 		videoContainer?.removeChild(videoEle);
-// 		if (videoContainer) {
-// 			document.body.removeChild(videoContainer);
-// 		}
-// 		videoEle = null;
-// 		videoContainer = null;
-// 	}
-// };
 
 const handlePlay = () => {
 	playDisabled.value = true;
@@ -152,9 +93,6 @@ onUnmounted(() => {
 	if (animationFrame) {
 		cancelAnimationFrame(animationFrame);
 	}
-	// if (videoEle) {
-	// 	destroyVideoElement();
-	// }
 });
 </script>
 
