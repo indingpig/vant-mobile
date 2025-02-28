@@ -12,7 +12,7 @@
 								<!-- 图片 -->
 								 <!-- flex flex-shrink-0 flex-grow items-center outline-none mx-10 -->
 								<div class="flex justify-center">
-									<img v-lazy="content.contentImg" alt="" class="h-[95%] object-contain" @load="imageLoad" ref="imgRef" />
+									<img v-lazy="content.contentImg" alt="" class="h-[95%] object-contain mt-2" @load="imageLoad" ref="imgRef" />
 								</div>
 								<!-- 播放 -->
 								<div class="w-full flex-auto flex-grow h-[200px] overflow-auto my-2">
@@ -84,7 +84,7 @@ const updateProgress = (progress: number) => {
 const imageLoad = () => {
 	console.log('image loaded');
 	if (imgRef.value!.width > imgRef.value!.height) {
-		imgRef.value!.style.width = "100%";
+		imgRef.value!.style.width = "95%";
 	} else {
 		imgRef.value!.style.width = "70%";
 	}
