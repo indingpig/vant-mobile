@@ -6,14 +6,16 @@
 					<div class="flex h-full w-full flex-col items-center gap-2">
 						<!-- 卡片图片与播放 -->
 						<div class="w-full flex-auto overflow-hidden">
-							<div class="flex h-full w-full flex-col items-center overflow-auto">
+							<!-- flex h-full w-full flex-col items-center overflow-auto -->
+							<div class="flex h-full w-full flex-col">
 								<div v-html="content.contentDesc"></div>
 								<!-- 图片 -->
-								<div class="flex flex-shrink-0 flex-grow items-center outline-none mx-10">
-									<img v-lazy="content.contentImg" alt="">
+								 <!-- flex flex-shrink-0 flex-grow items-center outline-none mx-10 -->
+								<div class="flex justify-center">
+									<img v-lazy="content.contentImg" alt="" class="h-[95%] object-contain" @load="imageLoad" ref="imgRef" />
 								</div>
 								<!-- 播放 -->
-								<div class="w-full flex-auto flex-grow max-h-[200px] overflow-auto my-4">
+								<div class="w-full flex-auto flex-grow h-[200px] overflow-auto my-2">
 									<div class="flex h-full w-full flex-auto flex-col justify-start px-4">
 										<PlayAudio
 											v-for="(item, index) in wordsList" :key="index"
@@ -65,6 +67,8 @@ const props = defineProps({
 
 const wordsList = ref();
 
+const imgRef = ref<HTMLImageElement | null>();
+
 const emits = defineEmits(['prev-card', 'next-card']);
 
 // const wordClass = ref('flex w-full flex-auto flex-col items-center justify-center gap-2');
@@ -75,6 +79,15 @@ const progressWidth = ref(0);
 
 const updateProgress = (progress: number) => {
 	progressWidth.value = progress;
+};
+
+const imageLoad = () => {
+	console.log('image loaded');
+	if (imgRef.value!.width > imgRef.value!.height) {
+		imgRef.value!.style.width = "100%";
+	} else {
+		imgRef.value!.style.width = "70%";
+	}
 };
 
 const prevCard = () => {
