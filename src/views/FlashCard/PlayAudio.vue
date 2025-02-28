@@ -53,12 +53,12 @@ const playAudio = () => {
 	if (!props.MediaUrl) return;
 	// 通过MediaUrl判断是音频还是视频
 	const videoList = ['.mp4', '.webm', '.flv', '.avi', '.mov', '.wmv', '.rmvb', '.mkv', '.3gp', '.rm', '.asf', '.divx', '.mpg', '.mpeg', '.mpe', '.ts', '.vob'];
-	if (videoList.some((item) => props.MediaUrl?.endsWith(item))) {
+	if (videoList.some((item) => props.MediaUrl?.toLowerCase().endsWith(item))) {
 		videoUrl.value = props.MediaUrl;
 		showModal.value = true;
 		return;
 	}
-	if (props.MediaUrl.endsWith('.mp3')) {
+	if (props.MediaUrl.toLowerCase().endsWith('.mp3')) {
 		// 如果还在播放的话，就返回
 		if (audioRef.value?.paused === false) return;
 		audioRef.value?.play();
