@@ -93,13 +93,13 @@
 			</div>
 		</main>
 		<footer>
-			<AD :subjectId="subjectId"/>
+			<AD :subjectId="decodeId"/>
 		</footer>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted, computed } from 'vue';
 import type { ListItem, MediaItem, Subject } from '@/types/FlashCard.d.ts';
 import { useRoute } from 'vue-router';
 import { getFlashCardListApi, getCompany } from '@/server/api/FlashCardApi';
@@ -108,8 +108,6 @@ import Card from './Card.vue';
 // const host = 'https://app.languagetogether.com';
 const logoUrl = ref<string>();
 const Route = useRoute();
-
-const subjectId = Route.query.subjectId as string;
 
 const pageConfig = reactive({
 	title: 'Flashcard',
@@ -162,87 +160,20 @@ const getCompanyList = (companyId: string) => {
 	});
 };
 
+const decodeSubjectId = (encoded: string) => {
+  // 补全可能缺失的 padding
+  let padded = encoded.replace(/-/g, '+').replace(/_/g, '/');
+  padded += '='.repeat((4 - padded.length % 4) % 4); // 补齐到 4 的倍数
+  return decodeURIComponent(atob(padded)); // 解码 Unicode
+};
+
 const init = () => {
-	if (!subjectId) {
+	if (!subjectId.value) {
 		return;
 	}
+	console.log('decodeId', decodeId.value);
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	getFlashCardListApi(subjectId).then((res: any) => {
-		// if (res && res.data.catalogList) {
-		// 	// floders
-		// 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		// 	res.data.catalogList.forEach((item: any) => {
-		// 		if (item.contentList) {
-		// 			// cards
-		// 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		// 			item.contentList.forEach((content: any) => {
-		// 				content.wordsList = [
-		// 					{
-		// 						wordsText: 'apple',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'English',
-		// 						isWord: '1',
-		// 					},
-		// 					{
-		// 						wordsText: 'This is an apple',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'English',
-		// 						isWord: '2',
-		// 					},
-		// 					{
-		// 						wordsText: 'manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '1',
-		// 					},
-		// 					{
-		// 						wordsText: 'Esto es una manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '2',
-		// 					},
-		// 					{
-		// 						wordsText: 'manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '1',
-		// 					},
-		// 					{
-		// 						wordsText: 'Esto es una manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '2',
-		// 					},
-		// 					{
-		// 						wordsText: 'manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '1',
-		// 					},
-		// 					{
-		// 						wordsText: 'Esto es una manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '2',
-		// 					},
-		// 					{
-		// 						wordsText: 'manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '1',
-		// 					},
-		// 					{
-		// 						wordsText: 'Esto es una manzana',
-		// 						wordsVoice: '',
-		// 						wordsLanguage: 'Spanish',
-		// 						isWord: '2',
-		// 					},
-		// 				];
-		// 			});
-		// 		}
-		// 	});
-		// }
-		console.log(res.data);
+	getFlashCardListApi(decodeId.value).then((res: any) => {
 		pageConfig.subject = res.data;
 		const companyId = res.data.companyId;
 		if (companyId) {
@@ -253,6 +184,8 @@ const init = () => {
 	// pageConfig.wordsList = DATA.wordsList;
 	// pageConfig.subject = DATA.subject;
 };
+const subjectId = computed(() => Route.query.subjectId as string);
+const decodeId = computed(() => decodeSubjectId(subjectId.value));
 
 onMounted(() => {
 	init();
