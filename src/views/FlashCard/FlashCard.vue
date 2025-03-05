@@ -164,7 +164,7 @@ const decodeSubjectId = (encoded: string) => {
   // 补全可能缺失的 padding
   let padded = encoded.replace(/-/g, '+').replace(/_/g, '/');
   padded += '='.repeat((4 - padded.length % 4) % 4); // 补齐到 4 的倍数
-  return decodeURIComponent(atob(padded)); // 解码 Unicode
+  return JSON.parse(decodeURIComponent(atob(padded))); // 解码 Unicode
 };
 
 const init = () => {
