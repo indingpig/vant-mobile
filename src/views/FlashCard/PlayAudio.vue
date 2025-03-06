@@ -13,7 +13,7 @@
 					'text-lt-orange': languageIcon === 'Spanish',
 				}"
 			></i>
-			<p class="text-center text-current text-xl"
+			<p class="text-center text-current text-xl min-h-2"
 				v-html="sentence"
 				:class="[isWord ? 'zain-regular' : 'zain-light']"
 			></p>
