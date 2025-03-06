@@ -22,7 +22,7 @@
 											:MediaUrl="item.wordsVoice"
 											:sentence="item.wordsText"
 											:languageIcon="item.wordsLanguage"
-											:showIcon="item.wordsText !== ''"
+											:showIcon="!['', null, undefined].includes(item.wordsText)"
 											:isWord="item.isWord === '1'"
 											@update-progress="updateProgress"
 										/>
